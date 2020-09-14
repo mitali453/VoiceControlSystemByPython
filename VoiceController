@@ -1,0 +1,101 @@
+import os
+import webbrowser
+import speech_recognition as sr
+import pyttsx3
+import easygui
+import time
+import datetime
+
+
+hour=int(datetime.datetime.now().hour)
+if hour>=0 and hour<12:
+	pyttsx3.speak("Good Morning buddy I am messi ,your assistant.How may I help you" )
+elif(hour>=12 and hour<18):
+	pyttsx3.speak("Good Afternoon my friend I am messi.How may I assist you")
+else: 
+	pyttsx3.speak("Good Evening bro I am messi.How may I help you")
+
+
+while True:
+	r=sr.Recognizer()
+	with sr.Microphone() as source:
+		pyttsx3.speak("Start saying messi is listening to you")
+		print("Start saying messi is listening to you")
+		audio=r.listen(source)
+		print("okkk! done")
+		p=r.recognize_google(audio).lower()
+
+		if (("notepad" in p or "text editor" in p)and ("open" in p or "run" in p or "execute" in p)):
+			pyttsx3.speak("wait , notepad is opening in a second")
+			os.system("notepad")
+			print(p)
+		elif ( ("not" not in p) and ("don't" not in p) and ("doesn't" not in p) and (("run" in p) or("execute" in p) or ("launch" in p) or ("open" in p)) and (("chrome" in  p) or ("google" in p)) ):
+			pyttsx3.speak("okkk, chrome is now opening")
+			os.system("chrome")
+			print(p)
+
+		elif ( ("not" not in p) and ("don't" not in p) and ("doesn't" not in p) and (("run" in p) or("execute" in p) or ("launch" in p)or ("open" in p)) and (("wmplayer" in p) or ("mediaplayer" in p) or ("window media player" in p)) ):
+			pyttsx3.speak("wait for a second")
+			os.system("wmplayer")
+			print(p)
+
+		elif ("date" in p and "show" in p):
+			pyttsx3.speak("today's date is:")
+			webbrowser.open("http://192.168.43.85/cgi-bin/my.py?x=date")
+		
+		elif("hackerrank" in p):
+			pyttsx3.speak("ohh! you want to do coding ,plz wait hackerrank is opening")
+			webbrowser.open("http://www.hackerrank.com")
+			
+		elif ( ("not" not in p) and ("don't" not in p) and ("doesn't" not in p) and (("run" in p) or ("execute" in p) or ("launch" in p) or ("open" in p) ) and (("vlc" in p)or ("vlcplayer" in p) or ("vlc player" in p)) ):	
+			os.system("vlc player")
+		
+		elif ("youtube" in p):
+			pyttsx3.speak("youtube is just open now")
+			webbrowser.open("http://www.youtube.com")
+		
+		elif ("calendar" in p ):
+			pyttsx3.speak("current month calendar is:")
+			webbrowser.open("http://192.168.43.85/cgi-bin/my.py?x=cal")
+		
+		elif("gmail" in p):
+			pyttsx3.speak("See your all mails are:")
+			webbrowser.open("https://mail.google.com/mail/u/0/#inbox")
+
+		elif("instagram" in p):
+			pyttsx3.speak("dear You can make you insta account here")
+			webbrowser.open("https://www.instagram.com/accounts/login/?hl=en")
+
+		elif("facebook" in p):
+			pyttsx3.speak("create your facebook account here to connect with your friends" )
+			webbrowser.open("https://www.facebook.com/")
+
+		elif("amazon" in p):
+			pyttsx3.speak("ohh you want to do shopping, its shopping time.")
+			webbrowser.open("https://www.amazon.in/")
+
+		elif("linkedin" in p or "linkdin" in p):
+			pyttsx3.speak("See your friends learning")
+			webbrowser.open("https://www.linkedin.com/")
+
+		elif("github" in p):
+			pyttsx3.speak("Create you github repository here")
+			webbrowser.open("https://github.com/")
+
+		elif("classroom" in p):
+			pyttsx3.speak("See your teacher has uploaded something new")
+			webbrowser.open("https://classroom.google.com/c/MTM3MjkxOTE0Mjg3")
+			
+		elif ( ("not" not in p) and ("don't" not in p) and ("doesn't" not in p) and (("run" in p) or ("execute" in p) or ("launch" in p) or ("open" in p)) and (("file explorer" in p) or ("fileexplorer" in p) or ("file manager" in p) or ("explorer" in p)) ):
+			os.system("explorer")
+		
+		elif( ("not" not in p) and ("don't" not in p) and ("doesn't" not in p) and (("run" in p) or ("execute" in p) or ("launch" in p) or ("open" in p)) and (("control panel" in p) or ("controlpanel" in p) or ("control panel system" in p)) ):
+			os.system("control panel")
+		
+		elif ( (("not" in p) or ("don't" in p) or ("doesn't" in p)) and (("run" in p) or ("execute" in p) or ("launch" in p) or ("open" in p)) and (("chrome" in  p) or ("google" in p) and ("chrom" in p)) ):
+			pyttsx3.speak("As per your request,Chrome is not opening")
+			easygui.msgbox("Okk! Chrome is not opened as your requirement\n---choose another option",title="REQUEST ACCEPTED!")
+		
+		else:
+			print("not understand")
+			print(r.recognize_google(audio))
